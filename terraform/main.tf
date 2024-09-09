@@ -21,3 +21,9 @@ resource "aws_instance" "app_server" {
     Name = "ExampleAppServerInstance"
   }
 }
+
+# Create an S3 bucket
+resource "aws_s3_bucket" "my_bucket" {
+  bucket = "example-buck-17gfka"  # Change this to your desired bucket name
+
+}
