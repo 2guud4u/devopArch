@@ -14,6 +14,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
@@ -22,12 +23,15 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
+         working-directory: terraform/
 
       - name: Terraform Plan
         run: terraform plan
+         working-directory: terraform/
 
       - name: Terraform Apply
         env:
           TF_VAR_aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           TF_VAR_aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: terraform apply -auto-approve
+         working-directory: terraform/
