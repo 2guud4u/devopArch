@@ -9,14 +9,16 @@ on:
         options:
           - Terraform_apply
           - Terraform_destroy
-      bucketName:
-        description: 'S3 Bucket Name'
-        required: false
-        default: 'my-unique-bucket-nameerere23r3r44'
       region:
         description: 'AWS Region'
         required: true
         default: 'us-west-2'
+      
+      uid:
+        description: 'Unique Identifier'
+        required: true
+        default: '123456'
+
       resourceType:
         description: 'Resource Type'
         required: true
@@ -24,6 +26,11 @@ on:
         options:
           - s3
           - ec2
+      bucketName:
+        description: 'S3 Bucket Name'
+        required: false
+        default: 'my-unique-bucket-nameerere23r3r44'
+      
       instance_type:
         description: 'EC2 Instance Type'
         required: false
@@ -40,6 +47,7 @@ jobs:
       TF_VAR_bucketName: ${{ github.event.inputs.bucketName }}
       TF_VAR_region: ${{ github.event.inputs.region }}
       TF_VAR_instance_type: ${{ github.event.inputs.instance_type }}
+      TF_VAR_uid: ${{ github.event.inputs.uid }}
 
     steps:
       - name: Checkout code
@@ -76,6 +84,7 @@ jobs:
       TF_VAR_bucketName: ${{ github.event.inputs.bucketName }}
       TF_VAR_region: ${{ github.event.inputs.region }}
       TF_VAR_instance_type: ${{ github.event.inputs.instance_type }}
+      TF_VAR_uid: ${{ github.event.inputs.uid }}
 
     steps:
       - name: Checkout code

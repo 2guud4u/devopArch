@@ -11,7 +11,7 @@ terraform {
 
 variable "bucketName" { type= string } 
 variable "region" { type= string }
-
+variable "uid" { type= string }
 
 provider "aws" {
   region  = var.region
@@ -20,4 +20,7 @@ provider "aws" {
 # Create an S3 bucket
 resource "aws_s3_bucket" "my_bucket" {
   bucket = var.bucketName  # Change this to your desired bucket name
+  tags = {
+    "uid" = var.uid
+  }
 }
