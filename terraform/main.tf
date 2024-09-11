@@ -10,10 +10,11 @@ terraform {
 }
 
 variable "bucketName" { type= string } 
+variable "region" { type= string }
 
 
 provider "aws" {
-  region  = "us-west-2"
+  region  = var.region
 }
 
 resource "aws_instance" "app_server" {
@@ -27,5 +28,5 @@ resource "aws_instance" "app_server" {
 
 # Create an S3 bucket
 resource "aws_s3_bucket" "my_bucket" {
-  bucket = "${var.bucketName}"  # Change this to your desired bucket name
+  bucket = var.bucketName  # Change this to your desired bucket name
 }

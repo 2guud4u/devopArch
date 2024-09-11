@@ -9,6 +9,14 @@ on:
         options:
           - Terraform_apply
           - Terraform_destroy
+      bucketName:
+        description: 'S3 Bucket Name'
+        required: true
+        default: 'my-unique-bucket-nameerere23r3r44'
+      region:
+        description: 'AWS Region'
+        required: true
+        default: 'us-west-2'
 
 jobs:
   terraform_apply:
@@ -18,7 +26,8 @@ jobs:
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      TF_VAR_bucketName: "my-unique-bucket-nameerere23r3r44"
+      TF_VAR_bucketName: ${{ github.event.inputs.bucketName }}
+      TF_VAR_region: ${{ github.event.inputs.region }}
 
     steps:
       - name: Checkout code
@@ -52,7 +61,8 @@ jobs:
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      TF_VAR_bucketName: "my-unique-bucket-nameerere23r3r44"
+      TF_VAR_bucketName: ${{ github.event.inputs.bucketName }}
+      TF_VAR_region: ${{ github.event.inputs.region }}
 
     steps:
       - name: Checkout code
