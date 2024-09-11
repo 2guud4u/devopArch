@@ -11,12 +11,19 @@ on:
           - Terraform_destroy
       bucketName:
         description: 'S3 Bucket Name'
-        required: true
+        required: false
         default: 'my-unique-bucket-nameerere23r3r44'
       region:
         description: 'AWS Region'
         required: true
         default: 'us-west-2'
+      resourceType:
+        description: 'Resource Type'
+        required: true
+        type: choice
+        options:
+          - s3
+          - ec2
 
 jobs:
   terraform_apply:
@@ -42,17 +49,17 @@ jobs:
       - name: Terraform Init
         run: terraform init
         
-        working-directory: terraform/
+        working-directory: terraform/${{ github.event.inputs.resourceType }}
 
       - name: Terraform Plan
         run: terraform plan
         
-        working-directory: terraform/
+        working-directory: terraform/${{ github.event.inputs.resourceType }}
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
         
-        working-directory: terraform/
+        working-directory: terraform/${{ github.event.inputs.resourceType }}
 
   terraform_destroy:
     name: "Terraform Destroy"
@@ -76,16 +83,16 @@ jobs:
       - name: Terraform Init
         run: terraform init
        
-        working-directory: terraform/
+        working-directory: terraform/${{ github.event.inputs.resourceType }}
 
       - name: Show Destroy Plan
         run: terraform plan -destroy
         continue-on-error: true
         
-        working-directory: terraform/
+        working-directory: terraform/${{ github.event.inputs.resourceType }}
 
       - name: Terraform Destroy
         run: terraform destroy -auto-approve
-        working-directory: terraform/
+        working-directory: terraform/${{ github.event.inputs.resourceType }}
 
           
