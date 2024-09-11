@@ -24,7 +24,9 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.7.5  # Specify the Terraform version you want to use
-
+      - name: setup variables
+        run: export TF_VAR_bucketName="newBuck1783dga"
+        
       - name: Terraform Init
         run: terraform init
         env:
