@@ -70,7 +70,7 @@ jobs:
         working-directory: terraform/${{ github.event.inputs.resourceType }}
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve -state-out=terraform/${{ github.event.inputs.uid }}.tfstate
         
         working-directory: terraform/${{ github.event.inputs.resourceType }}
 
@@ -101,7 +101,7 @@ jobs:
         working-directory: terraform/${{ github.event.inputs.resourceType }}
 
       - name: Show Destroy Plan
-        run: terraform plan -destroy
+        run: terraform plan -destroy -state=terraform/${{ github.event.inputs.uid }}.tfstate
         continue-on-error: true
         
         working-directory: terraform/${{ github.event.inputs.resourceType }}
