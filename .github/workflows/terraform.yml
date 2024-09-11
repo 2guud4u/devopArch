@@ -87,3 +87,5 @@ jobs:
       - name: Terraform Destroy
         run: terraform destroy -auto-approve
         working-directory: terraform/
+        env:
+          TF_VAR_bucketName: "my-unique-bucket-nameerere23r3r44"
