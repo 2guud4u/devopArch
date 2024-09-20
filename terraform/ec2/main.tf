@@ -18,8 +18,8 @@ provider "aws" {
 }
 
 resource "aws_instance" "app_server" {
-  ami           = "ami-08d8ac128e0a1b91c"
-  instance_type = "t2.micro"
+  ami           = "ami-05134c8ef96964280"
+  instance_type = instance_type
 
   tags = {
     "uid" = var.uid
