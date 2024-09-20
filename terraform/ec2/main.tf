@@ -19,7 +19,7 @@ provider "aws" {
 
 resource "aws_instance" "app_server" {
   ami           = "ami-05134c8ef96964280"
-  instance_type = instance_type
+  instance_type = var.instance_type
 
   tags = {
     "uid" = var.uid
