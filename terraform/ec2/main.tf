@@ -17,8 +17,19 @@ provider "aws" {
   region  = var.region
 }
 
+data "aws_ami" "latest_amazon_linux" {
+  most_recent = true
+
+  owners = ["amazon"]  # Public AMIs owned by Amazon
+
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm-*-x86_64-gp2"]  # Pattern for Amazon Linux 2
+  }
+}
+
 resource "aws_instance" "app_server" {
-  ami           = "ami-05134c8ef96964280"
+  ami           = data.aws_ami.latest_amazon_linux.id
   instance_type = var.instance_type
 
   tags = {
